@@ -1,7 +1,7 @@
 ###############################
 # Data sampling
 ###############################
-
+  
 # create a vector with values from 1 to 10
 x <- 1:10
 
@@ -255,8 +255,8 @@ tail(beatles)
 
 # add the song after the 3rd song in the data frame 
 beatles <- rbind(beatles[1:3, ],
-                 new.song, 
-                 beatles[4:nrow(beatles), ])
+                           new.song, 
+                           beatles[4:nrow(beatles), ])
 head(beatles)
 
 ###############################
