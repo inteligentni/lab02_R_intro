@@ -76,7 +76,7 @@
 # get names of all list elements
 
 
-# get elements with name 'age'
+# get elements with 'age' in their name
 
 
 
@@ -219,7 +219,7 @@
 # get column names
 
 
-# change name of the column 'Genre' to 'Song.genre'
+# change name of the column that starts with 'Genre' to 'Song.genre'
 
 
 # change name of the column at the index 6 to 'Genre'
@@ -247,7 +247,10 @@
 # create a vector of logical values denoting whether there the attribute Album.debut has a value or not
 
 
-# songs at indexes of all TRUE value will have their Album.debut attribute set to 'empty'
+# compute how many songs lack the data about the debut album
+
+
+# for songs without debut album data, set the value of the Album.debut attribute to 'empty'
 
 
 # set the value back to empty string
@@ -260,10 +263,11 @@
 # save dataset to a CSV file, but without the row names (row numbers) column
 
 
-# save R object for the next session into file "p2.RData"
+# save R object for the next session into file "data/beatles_v3.RData"
 
 
-# restore R object from the file "p2.RData" in the next session
+# restore R object from the file "data/beatles_v3.RData" in the next session
+
 
 
 ###############################
@@ -275,11 +279,3 @@
 # Answer:
 
 
-
-###############################
-# Homework
-###############################
-
-# Create a 2 x 3 matrix with the following elements: 3, 9, -1, 4, 2, 6. Print only the positive values from the first row.
-
-# Answer:

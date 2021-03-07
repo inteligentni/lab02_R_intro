@@ -1,9 +1,9 @@
 ---
 title: "Intro to R - Part II"
 output:
-  pdf_document: default
-  html_document: default
   word_document: default
+  html_document: default
+  pdf_document: default
 ---
 
 # Data sampling
@@ -139,9 +139,10 @@ is.list(travelers)
 # get names of all list elements
 names(travelers)
 
-# get elements with name 'age'
-travelers[names(travelers) == "age"]
+# get elements with 'age' in their name
+travelers[grepl('age', names(travelers))]
 ```
+Note: *grepl()* returns a logical vector indicating match or not match with the given pattern (1st argument) for each element of the vector or list that is passed as the 2nd argument.
 
 # Loops and branching
 
@@ -233,22 +234,23 @@ my_abs(5)
 my_abs(-5)
 ```
 
-## Applying a function over rows and columns in data frame
+## Applying a function over rows and columns of a data frame
 
-We can apply a custom function to a data frame (similar can be done with vectors, lists and matrices). The *apply()* function accepts data frame as the first argument. The second argument is called MARGIN and it defines how the function is applied. If MARGIN=1, it applies over rows, whereas with MARGIN=2, it works over columns. When MARGIN=c(1,2), it applies to both rows and columns. 
+We can apply a custom function to a vector, list, matrix or data frame. 
+The *sapply()* function accepts a vector or a list as the first argument. The 2nd argument is a function to be applied to each element of the vector / list given as the 1st argument. The result is a vector of the computed values.
 
 ```{r}
 # load the data "data/beatles_v2.csv"
-beatles <- read.csv("data/beatles_v2.csv", stringsAsFactors = FALSE)
+beatles <- read.csv("data/beatles_v2.csv")
 
 # get the number of characters in the song title "Yellow Submarine"
 nchar("Yellow Submarine")
 
 # get the number of characters of the first 10 songs
-apply(beatles[1:10, 1, drop=FALSE], 1, nchar)
+sapply(beatles$Title[1:10], nchar)
 ```
 
-NOTE: When subsetting the dataframe to only one column (like in the previous example), the return value is a vector. If we want to get a dataframe (with one column) as a return value, we need to supply "drop=FALSE" argument. This will tell R not to convert the result to a vector, but to return the dataframe.
+The *apply()* function accepts a data frame or a matrix as the first argument. The second argument is called MARGIN and it defines how the function (3rd argument) is applied. If MARGIN=1, it applies over rows, whereas with MARGIN=2, it works over columns. When MARGIN=c(1,2), it applies to both rows and columns. 
 
 ```{r}
 # calculate the mean value of the duration and Top.50.Billboard values of all songs from 1963
@@ -393,8 +395,8 @@ head(beatles2)
 # get column names
 colnames(beatles)
 
-# change name of the column 'Genre' to 'Song.genre'
-genreIndex <- which(colnames(beatles) == "Genre")
+# change name of the column that starts with 'Genre' to 'Song.genre'
+genreIndex <- which(startsWith(colnames(beatles), "Genre"))
 colnames(beatles)[genreIndex] <- "Song.genre"
 colnames(beatles)
 ```
@@ -427,7 +429,7 @@ first.songs <- beatles[1:5, c("Title", "Album.debut")]
 first.songs
 
 # get the songs from year 1964 not having McCartney as a lead vocal
-indexes <- which((beatles$Year == "1964") & (beatles$Lead.vocal != "McCartney"))
+indexes <- which((beatles$Year == "1964") & (!grepl('McCartney', beatles$Lead.vocal)))
 selected.songs <- beatles[indexes, ]
 head(selected.songs)
 
@@ -439,10 +441,13 @@ head(songs.1958)
 Values of specific columns/rows can be changed by assigning new values to them.
 
 ```{r}
-# create a vector of logical values denoting whether there the attribute Album.debut has a value or not
+# create a vector of logical values denoting whether the attribute Album.debut has a value or not
 empty.album.debut <- beatles$Album.debut == ""
 
-# songs at indexes of all TRUE value will have their Album.debut attribute set to 'empty'
+# compute how many songs lack the data about the debut album
+sum(empty.album.debut)
+
+# for songs without debut album data, set the value of the Album.debut attribute to 'empty'
 beatles$Album.debut[empty.album.debut] <- "empty"
 
 # set the value back to empty string
@@ -453,13 +458,13 @@ beatles$Album.debut[empty.album.debut] <- ""
 
 ```{r}
 # save dataset to a CSV file, but without the row names (row numbers) column
-write.csv(beatles, "data/p2.csv", row.names = F)
+write.csv(beatles, "data/beatles_v3.csv", row.names = F)
 
-# save R object for the next session into file "p2.RData"
-saveRDS(beatles, "p2.RData")
+# save R object for the next session into file "data/beatles_v3.RData"
+saveRDS(beatles, "data/beatles_v3.RData")
 
-# restore R object from the file "p2.RData" in the next session
-p2 <- readRDS("p2.RData")
+# restore R object from the file "data/beatles_v3.RData" in the next session
+b3 <- readRDS("data/beatles_v3.RData")
 ```
 
 ## Task 2
@@ -471,23 +476,4 @@ Answer:
 beatles$Billboard.hit <- FALSE
 beatles$Billboard.hit[!is.na(beatles$Top.50.Billboard)] <- TRUE
 head(beatles)
-```
-
-
-####
-# Homework
-
-## Task 1
-
-Create a 2 x 3 matrix with the following elements: 3, 9, -1, 4, 2, 6. Print only the positive values from the first row.
-
-Answer:
-```{r}
-matrix1 <- matrix(c(3, 9, -1, 4, 2, 6), nrow = 2)
-
-for (i in matrix1[1,]) {
-  if (i > 0) {
-    print(i)
-  }
-}
 ```
