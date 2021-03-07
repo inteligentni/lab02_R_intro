@@ -90,8 +90,8 @@ is.list(travelers)
 # get names of all list elements
 names(travelers)
 
-# get elements with name 'age'
-travelers[names(travelers) == "age"]
+# get elements with 'age' in their name
+travelers[grepl('age', names(travelers))]
 
 
 ###############################
@@ -171,13 +171,13 @@ my_abs(-5)
 ##############################################################
 
 # load the data "data/beatles_v2.csv"
-beatles <- read.csv("data/beatles_v2.csv", stringsAsFactors = FALSE)
+beatles <- read.csv("data/beatles_v2.csv")
 
 # get the number of characters in the song title "Yellow Submarine"
 nchar("Yellow Submarine")
 
 # get the number of characters of the first 10 songs
-apply(beatles[1:10, 1, drop=FALSE], 1, nchar)
+sapply(beatles$Title[1:10], nchar)
 
 # calculate the mean value of the duration and Top.50.Billboard values of all songs from 1963
 apply(beatles[beatles$Year == 1963, c(4,9)], 2, mean)
@@ -286,8 +286,8 @@ head(beatles2)
 # get column names
 colnames(beatles)
 
-# change name of the column 'Genre' to 'Song.genre'
-genreIndex <- which(colnames(beatles) == "Genre")
+# change name of the column that starts with 'Genre' to 'Song.genre'
+genreIndex <- which(startsWith(colnames(beatles), "Genre"))
 colnames(beatles)[genreIndex] <- "Song.genre"
 colnames(beatles)
 
@@ -312,7 +312,7 @@ first.songs <- beatles[1:5, c("Title", "Album.debut")]
 first.songs
 
 # get the songs from year 1964 not having McCartney as a lead vocal
-indexes <- which((beatles$Year == "1964") & (beatles$Lead.vocal != "McCartney"))
+indexes <- which((beatles$Year == "1964") & (!grepl('McCartney', beatles$Lead.vocal)))
 selected.songs <- beatles[indexes, ]
 head(selected.songs)
 
@@ -320,10 +320,13 @@ head(selected.songs)
 songs.1958 <- subset(beatles, Year == 1958, c("Title", "Album.debut"))
 head(songs.1958)
 
-# create a vector of logical values denoting whether there the attribute Album.debut has a value or not
+# create a vector of logical values denoting whether the attribute Album.debut has a value or not
 empty.album.debut <- beatles$Album.debut == ""
 
-# songs at indexes of all TRUE value will have their Album.debut attribute set to 'empty'
+# compute how many songs lack the data about the debut album
+sum(empty.album.debut)
+
+# for songs without debut album data, set the value of the Album.debut attribute to 'empty'
 beatles$Album.debut[empty.album.debut] <- "empty"
 
 # set the value back to empty string
@@ -334,13 +337,13 @@ beatles$Album.debut[empty.album.debut] <- ""
 ###############################
 
 # save dataset to a CSV file, but without the row names (row numbers) column
-write.csv(beatles, "data/p2.csv", row.names = F)
+write.csv(beatles, "data/beatles_v3.csv", row.names = F)
 
-# save R object for the next session into file "p2.RData"
-saveRDS(beatles, "p2.RData")
+# save R object for the next session into file "data/beatles_v3.RData"
+saveRDS(beatles, "data/beatles_v3.RData")
 
-# restore R object from the file "p2.RData" in the next session
-p2 <- readRDS("p2.RData")
+# restore R object from the file "data/beatles_v3.RData" in the next session
+b3 <- readRDS("data/beatles_v3.RData")
 
 ###############################
 # Task 2
@@ -352,19 +355,3 @@ p2 <- readRDS("p2.RData")
 beatles$Billboard.hit <- FALSE
 beatles$Billboard.hit[!is.na(beatles$Top.50.Billboard)] <- TRUE
 head(beatles)
-
-
-###############################
-# Homework
-###############################
-
-# Create a 2 x 3 matrix with the following elements: 3, 9, -1, 4, 2, 6. Print only the positive values from the first row.
-
-# Answer:
-matrix1 <- matrix(c(3, 9, -1, 4, 2, 6), nrow = 2)
-
-for (i in matrix1[1,]) {
-  if (i > 0) {
-    print(i)
-  }
-}
