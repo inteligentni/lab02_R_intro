@@ -4,6 +4,7 @@
   
 # create a vector with values from 1 to 10
 
+
 # create a sample of size 5 from the vector
 
 
@@ -22,6 +23,7 @@
 
 # get the first row
 
+
 # get the element from row 1, column 2
 
 
@@ -33,7 +35,9 @@
 
 # create two matrices of the same dimension
 
+
 # add matrix2 to matrix1
+
 
 # transpose a matrix
 
@@ -43,7 +47,9 @@
 
 # create a new list with attributes: passport, age, diplomatic
 
+
 # get the 2nd element
+
 
 # get the value of the 2nd element
 
@@ -59,11 +65,15 @@
 
 # delete 3rd element
 
+
 # concatinate two lists
+
 
 # check if travelers is a list
 
+
 # get names of all list elements
+
 
 
 # get elements with 'age' in their name
@@ -83,10 +93,12 @@
 
 # print all odd numbers from 1 to 10 using while loop
 
+
 ###############################
 # Task 1
 ###############################
 #Create a 2 x 3 matrix with the following elements: 3, 9, -1, 4, 2, 6 (by row). Print only the positive values from the first row.
+
 
 # Answer:
 
@@ -113,12 +125,15 @@
 
 # load the data "data/beatles_v2.csv"
 
+
 # get the number of characters in the song title "Yellow Submarine"
+
 
 # get the number of characters of the first 10 songs
 
 
 # calculate the mean value of the duration and Top.50.Billboard values of all songs from 1963
+
 
 # calculate the mean value of the duration and Top.50.Billboard values that are not NAs of all songs from 1963
 
@@ -129,7 +144,9 @@
 
 # create a contingency table of column Year values
 
+
 # get the 4th element from the table
+
 
 # store the 4th element from the table in a variable
 
@@ -139,6 +156,7 @@
 
 # sort the table in the descending order
 
+
 # get the proportions table for the values of the Year column
 
 
@@ -146,6 +164,7 @@
 
 
 # get the proportions table for the values of the Year column, but limiting number of digits to 2
+
 
 # create a contingency table Top.50.Billboard vs. Year
 
@@ -160,9 +179,12 @@
 
 # create a new column On.album and set FALSE for all songs
 
+
 # create a new data frame with two columns (with sample data)
 
+
 # combine two data frames
+
 
 # get the first song
 
@@ -179,7 +201,9 @@
 
 # remove the attribute On.album
 
+
 # remove columns Platinum (at index 10) and Score (at index 11)
+
 
 # create a subset of the data frame without songs in rows 2, 4 and 6 
 
@@ -236,6 +260,7 @@
 ###############################
 
 # save dataset to a CSV file, but without the row names (row numbers) column
+
 
 # save R object for the next session into file "data/beatles_v3.RData"
 
