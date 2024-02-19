@@ -49,49 +49,6 @@ matrix1 + matrix2
 # transpose a matrix
 t(matrix1)
 
-###############################
-# Lists
-###############################
-
-# create a new list with attributes: passport, age, diplomatic
-traveler1 <- list(passport = "P123123", age = 34, diplomatic=TRUE)
-traveler1
-
-# get the 2nd element
-traveler1[2]
-
-# get the value of the 2nd element
-traveler1[[2]]
-
-# get the value of the age element
-traveler1$age
-
-# get the list length
-length(traveler1)
-
-# add new list after the 2nd element
-traveler1 <- append(traveler1, list(country = "AUS"), after=2)
-length(traveler1)
-traveler1
-
-# delete 3rd element
-traveler1[[3]] <- NULL
-length(traveler1)
-traveler1
-
-# concatinate two lists
-traveler2 <- list(passport = "P456456", age = 14, diplomatic = FALSE)
-travelers <- c(traveler1, traveler2)
-travelers
-
-# check if travelers is a list
-is.list(travelers)
-
-# get names of all list elements
-names(travelers)
-
-# get elements with 'age' in their name
-travelers[grepl('age', names(travelers))]
 
 
 ###############################
@@ -105,18 +62,6 @@ for (i in 1:10) {
   }
 }
 
-###############################
-# While loop
-###############################
-
-# print all odd numbers from 1 to 10 using while loop
-i <- 1
-while (i <= 10) {
-  if (i %% 2 == 1) {
-    print(paste(i,"is odd number"))
-  }
-  i <- i + 1
-}
 
 ###############################
 # Task 1
@@ -278,30 +223,6 @@ head(beatles1)
 # create a subset of the data frame without songs in rows from 1 to 8 
 beatles2 <- beatles[-(1:8), ]
 head(beatles2)
-
-##################################
-## Updating column and row names
-#################################
-
-# get column names
-colnames(beatles)
-
-# change name of the column that starts with 'Genre' to 'Song.genre'
-genreIndex <- which(startsWith(colnames(beatles), "Genre"))
-colnames(beatles)[genreIndex] <- "Song.genre"
-colnames(beatles)
-
-# change name of the column at the index 6 to 'Genre'
-colnames(beatles)[6] <- "Genre"
-colnames(beatles)
-
-# change row names to a string containing word 'song' and a song order number
-rownames(beatles) <- paste("song", 1:nrow(beatles))
-head(beatles)
-
-# change row names to a string containing order number
-rownames(beatles) <- c(1:nrow(beatles))
-head(beatles)
 
 ##################################
 ## Retrieving and changing values
