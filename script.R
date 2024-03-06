@@ -81,11 +81,11 @@ for (i in matrix1[1,]) {
 ## if-else
 ###############################
 
-# use ifelse function to create a new attribute called 'request' with the value 'assistance required' if a traveler is younger than 10 years, and the value 'no special requests' otherwise
-traveler1$request <- ifelse(test = traveler1$age < 10,
-                            yes = "assistance required",
-                            no = "no special requests")
-traveler1
+# Use ifelse to create a new matrix where values > 5 are replaced by 1 and others by 0
+
+modified_matrix <- ifelse(matrix1 > 5, 1, 0)
+
+
 
 ########################################
 # User-defined functions and apply
@@ -276,3 +276,4 @@ b3 <- readRDS("data/beatles_v3.RData")
 beatles$Billboard.hit <- FALSE
 beatles$Billboard.hit[!is.na(beatles$Top.50.Billboard)] <- TRUE
 head(beatles)
+
