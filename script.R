@@ -81,7 +81,7 @@ for (i in matrix1[1,]) {
 ## if-else
 ###############################
 
-# Use ifelse to create a new matrix where values > 5 are replaced by 1 and others by 0
+# Use ifelse to create a new matrix (from the existing matrix1) where values > 5 are replaced by 1 and others by 0
 
 modified_matrix <- ifelse(matrix1 > 5, 1, 0)
 
@@ -116,7 +116,7 @@ my_abs(-5)
 ##############################################################
 
 # load the data "data/beatles_v2.csv"
-beatles <- read.csv("data/beatles_v2.csv")
+beatles <- read.csv("data/beatles_v2.csv", stringsAsFactors = F)
 
 # get the number of characters in the song title "Yellow Submarine"
 nchar("Yellow Submarine")
